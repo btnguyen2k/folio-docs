@@ -1,16 +1,17 @@
-# folio-docs
-Documentation templates for modern web projects — a clean, fast, **framework-free**
-template for building web-based technical documentation and user guides.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Release](https://img.shields.io/github/release/btnguyen2k/folio-docs.svg?style=flat-square)](RELEASE-NOTES.md)
 
-Built with plain HTML, vanilla JavaScript and [Tailwind CSS](https://tailwindcss.com).
-No build step is required to get started.
+folio-docs is a clean, **framework-free** template for building web-based technical documentation and user guides.
+
+Built with plain HTML, vanilla JavaScript and [Tailwind CSS](https://tailwindcss.com) -
+every page is complete, editable HTML with no build step and almost no JavaScript.
 
 ## Features
 
 - 7 page types: Home, Category, Article, Search, Changelog, About, and 404.
 - Category → Article content model (an article belongs to one category).
 - **Static-first:** every page ships complete HTML for the header, sidebar and
-  footer — edit the markup directly, no JavaScript builds the layout.
+  footer - edit the markup directly, no JavaScript builds the layout.
 - **Pure-CSS mobile navigation drawer** (a checkbox + `:has()`, no JS).
 - Light / dark theme toggle (the only UI effect that needs JS; persisted in
   `localStorage`).
@@ -21,7 +22,7 @@ No build step is required to get started.
 JS is used for exactly two things, kept in clearly separated files:
 
 - **Data:** `src/mock-data.js` (the search index) consumed by `src/js/search.js`.
-- **Effects:** `src/js/effects.js` — theme persistence only.
+- **Effects:** `src/js/effects.js` - theme persistence only.
 
 ## Getting started
 
