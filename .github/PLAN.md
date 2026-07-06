@@ -44,7 +44,34 @@ Implement as reusable partials/markup so every page reuses the same structure.
   rather than inline in pages. Pages read categories/articles from this module so
   content is centralized and easy to swap out.
 
+## Architecture principles (v2 — static-first)
+
+- **Maximize HTML/CSS:** every page ships complete static HTML chrome (header,
+  sidebar, footer) and content that developers edit directly. No JS builds layout.
+- **Minimize JS**, used only for:
+  - **mock data** — `src/mock-data.js` (search index) consumed by `src/js/search.js`.
+  - **effects impossible in pure CSS** — `src/js/effects.js` (theme persistence).
+- **Clear separation:** data JS (`mock-data.js`/`search.js`) is kept apart from
+  effect JS (`effects.js`) so developers know exactly what to touch.
+- **Pure-CSS interactions:** mobile nav drawer uses a checkbox + `:has()` (no JS);
+  theme is applied pre-paint by a tiny inline `<head>` script, toggled by effects.js.
+
 ## Status
 
-Planning complete. Ready to design pages. No page implemented yet
-(`src/` holds only placeholder `EMPTY`).
+Implemented. All 7 pages built under `src/` and verified rendering (incl. edge
+cases) via a headless jsdom pass.
+
+### File map
+
+- `src/index.html` — Home / categories index
+- `src/category.html`, `src/article.html`, `src/search.html`,
+  `src/changelog.html`, `src/about.html`, `src/404.html`
+- `src/css/styles.css` — prose styles + pure-CSS mobile drawer (`:has()`)
+- `src/js/effects.js` — theme-toggle persistence (the only effect JS)
+- `src/mock-data.js` — search index (data only)
+- `src/js/search.js` — search feature (only data-consuming script; search page only)
+
+Every page ships **complete static HTML** for header, sidebar, footer and
+content. JS is limited to theme persistence (`effects.js`) and search
+(`mock-data.js` + `search.js`). Tailwind is loaded via the Play CDN (no build
+step). Pages open directly from the filesystem.

@@ -8,26 +8,49 @@ user guides, and similar sites** (see `README.md`).
 The template is built with **pure HTML, CSS, JavaScript, and Tailwind CSS** — no
 server-side framework or SPA framework. All template source lives under `src/`.
 
-It is at an early, skeleton stage: `src/` currently holds only a placeholder
-`EMPTY` file and no real templates exist yet.
+## Architecture (static-first)
+
+- **Every page is complete static HTML.** Header, sidebar navigation, footer and
+  page content are authored directly in each `src/*.html` file — no JavaScript
+  builds or injects the layout. Edit the markup to change a page.
+- **JavaScript is deliberately minimal and used for only two things**, kept in
+  clearly separated files:
+  - **Data:** `src/mock-data.js` is the search index (data only, no behavior),
+    consumed by `src/js/search.js` (the only data-consuming page script, loaded
+    on `search.html` only).
+  - **Effects:** `src/js/effects.js` handles the light/dark theme toggle
+    persistence (`localStorage`) — the only behavior CSS can't provide. It is
+    loaded on every page and must stay free of any content/data.
+- **Prefer HTML/CSS over JS.** The mobile nav drawer is pure CSS (a hidden
+  `#nav-toggle` checkbox + `:has()` in `src/css/styles.css`), not JS. Only add JS
+  for mock data or for effects genuinely impossible in HTML/CSS.
+- The initial theme is applied by a tiny inline `<head>` script on each page to
+  avoid a flash before `effects.js` loads.
 
 ## Tech stack and constraints
 
 - **Output is static assets**: hand-authored HTML, CSS, and vanilla JavaScript.
-- **Styling is Tailwind CSS.** Prefer Tailwind utility classes in markup over
-  hand-written CSS; add custom CSS only when a utility approach is impractical.
+- **Styling is Tailwind CSS**, loaded via the Play CDN (`cdn.tailwindcss.com`)
+  with `darkMode: 'class'`. Prefer Tailwind utility classes in markup; put custom
+  CSS in `src/css/styles.css` only when utilities can't express it (currently the
+  drawer and `.doc-prose` article styles).
 - Keep client-side JavaScript plain/vanilla — do not introduce React, Vue,
   Svelte, or a bundler-heavy SPA framework unless the maintainer asks.
 - All template source files go under `src/`.
 
-## Current state (read before assuming tooling exists)
+## Content model
 
-- No `package.json`, build script, test runner, or linter is configured yet.
-- Do **not** invent or reference `npm run build`/`npm test` commands until the
-  corresponding tooling is actually added to the repo. (A Tailwind build step will
-  likely be the first tooling added; update this file when it lands.)
-- The `.gitignore` is the standard Node.js template, signalling a Node-based
-  toolchain (e.g., the Tailwind CLI) is expected, but nothing is installed yet.
+- A **Category** contains multiple **Articles**; an **Article** belongs to one
+  Category. Pages: Home (also the categories index), Category, Article, Search,
+  Changelog, About/Contact, 404.
+- The static pages and `mock-data.js` (the search index) both describe the same
+  articles; keep them in sync when adding/renaming content.
+
+## Current state
+
+- No `package.json`, build step, test runner, or linter is configured. Pages run
+  directly from the filesystem or any static server (`cd src && npx serve .`).
+- Do **not** invent `npm run build`/`npm test` commands — none exist yet.
 
 ## Conventions
 
