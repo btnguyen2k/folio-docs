@@ -54,13 +54,13 @@ jobs:
       RELEASE_NOTES: ${{ needs.ReleaseDryRun.outputs.RELEASE_NOTES }}
     steps:
       - uses: actions/checkout@v7
-      - name: Update module meta
+      - name: Update metadata
         run: |
           RESULT='${{ needs.ReleaseDryRun.outputs.RESULT }}'
           VERSION='${{ needs.ReleaseDryRun.outputs.VERSION }}'
           RELEASE_NOTES='${{ needs.ReleaseDryRun.outputs.RELEASE_NOTES }}'
 
-          echo "🕘 Updating module meta..."
+          echo "🕘 Updating metadata..."
           echo "   - RESULT: ${RESULT}"
           echo "   - VERSION: ${VERSION}"
           echo "   - RELEASE_NOTES: ${RELEASE_NOTES}"
@@ -92,7 +92,8 @@ jobs:
             echo ========== commit updates ==========
             git config --global user.email "<>"
             git config --global user.name "CI Build"
-            git commit -am "Update ${FILE_CHANGELOG}, *.md files and version info in *.html files for new version ${VERSION}"
+            git add .
+            git commit -m "Update ${FILE_CHANGELOG}, *.md files and version info in *.html files for new version ${VERSION}"
             git push origin ${BRANCH_TO_RELEASE}
 
             echo ========== tag ==========
