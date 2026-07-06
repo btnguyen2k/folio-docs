@@ -1,0 +1,122 @@
+/*
+ * folio-docs — supplemental styles.
+ *
+ * Layout and design use Tailwind utility classes directly in the HTML (Play CDN).
+ * This file only adds what utilities can't express inline:
+ *   1. The pure-CSS mobile navigation drawer (driven by the #nav-toggle checkbox).
+ *   2. Rich-text article body styling (.doc-prose).
+ * No JavaScript is involved in either.
+ */
+
+/* ------------------------------------------------------------------ *
+ * Mobile navigation drawer — pure CSS, no JS.
+ * The hidden #nav-toggle checkbox in each page drives the sidebar via :has().
+ * ------------------------------------------------------------------ */
+@media (max-width: 1023.98px) {
+  .site-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+  body:has(#nav-toggle:checked) .site-sidebar {
+    transform: translateX(0);
+  }
+  .nav-overlay {
+    display: none;
+  }
+  body:has(#nav-toggle:checked) .nav-overlay {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: sidebar is always in view; drawer controls are hidden. */
+  .site-sidebar {
+    transform: none !important;
+  }
+  .nav-overlay,
+  .nav-toggle-btn {
+    display: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Article body (.doc-prose) — the Tailwind Typography plugin is not part
+ * of the Play CDN, so basic prose styles are defined here.
+ * ------------------------------------------------------------------ */
+.doc-prose {
+  line-height: 1.7;
+}
+.doc-prose > * + * {
+  margin-top: 1rem;
+}
+.doc-prose h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.doc-prose h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.doc-prose a {
+  color: #4f46e5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.doc-prose a:hover {
+  color: #4338ca;
+}
+.doc-prose ul,
+.doc-prose ol {
+  padding-left: 1.5rem;
+}
+.doc-prose ul {
+  list-style: disc;
+}
+.doc-prose ol {
+  list-style: decimal;
+}
+.doc-prose li + li {
+  margin-top: 0.25rem;
+}
+.doc-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background: rgba(100, 116, 139, 0.15);
+  padding: 0.15em 0.4em;
+  border-radius: 0.3rem;
+}
+.doc-prose pre {
+  overflow-x: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem 1.25rem;
+  border-radius: 0.6rem;
+  font-size: 0.875rem;
+}
+.doc-prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.doc-prose blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 1rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Dark-mode prose adjustments */
+.dark .doc-prose a {
+  color: #a5b4fc;
+}
+.dark .doc-prose a:hover {
+  color: #c7d2fe;
+}
+.dark .doc-prose blockquote {
+  color: #94a3b8;
+}
