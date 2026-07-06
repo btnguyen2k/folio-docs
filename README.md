@@ -6,6 +6,28 @@ folio-docs is a clean, **framework-free** template for building web-based techni
 Built with plain HTML, vanilla JavaScript and [Tailwind CSS](https://tailwindcss.com) -
 every page is complete, editable HTML with no build step and almost no JavaScript.
 
+## Screenshots
+
+The home page in light and dark themes:
+
+| Light | Dark |
+| --- | --- |
+| [![Home page (light)](docs/screenshot-home.png)](docs/screenshot-home.png) | [![Home page (dark)](docs/screenshot-home-dark.png)](docs/screenshot-home-dark.png) |
+
+Other page types:
+
+| Category | Article |
+| --- | --- |
+| [![Category page](docs/screenshot-category.png)](docs/screenshot-category.png) | [![Article page](docs/screenshot-article.png)](docs/screenshot-article.png) |
+
+| Search | Changelog |
+| --- | --- |
+| [![Search page](docs/screenshot-search.png)](docs/screenshot-search.png) | [![Changelog page](docs/screenshot-changelog.png)](docs/screenshot-changelog.png) |
+
+| About | 404 |
+| --- | --- |
+| [![About page](docs/screenshot-about.png)](docs/screenshot-about.png) | [![404 page](docs/screenshot-404.png)](docs/screenshot-404.png) |
+
 ## Features
 
 - 7 page types: Home, Category, Article, Search, Changelog, About, and 404.
